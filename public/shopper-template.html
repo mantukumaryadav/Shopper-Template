@@ -106,6 +106,29 @@
                 GetCartItemsCount();
             })
         }
+        function ShowCartClick(){
+            document.querySelector("tbody").innerHTML = "";
+            for(var item of cartItems)
+            {
+                var tr = document.createElement("tr");
+                var tdName = document.createElement("td");
+                var tdPrice = document.createElement("td");
+                var tdPreview = document.createElement("td");
+                var tdAction = document.createElement("td");
+
+                tdName.innerHTML = item.title;
+                tdPrice.innerHTML = item.price;
+                tdPreview.innerHTML = `<img src=${item.image} width="50" height="50">`;
+                tdAction.innerHTML = `<button class="btn btn-danger"><span class="bi bi-trash"></span></button>`;
+
+                tr.appendChild(tdName);
+                tr.appendChild(tdPrice);
+                tr.appendChild(tdPreview);
+                tr.appendChild(tdAction);
+
+                document.querySelector("tbody").appendChild(tr);
+            }
+        }
     </script>
 </head>
 <body class="container-fluid" onload="bodyload()">
@@ -124,7 +147,8 @@
         <div>
             <span class="me-2"><a><span class="bi bi-person"></span></a></span>
             <span class="me-2"><a><span class="bi bi-heart"></span></a></span>
-            <span class="me-2 position-relative"><a href="#cart" data-bs-dismiss="modal"><span class="bi bi-cart3"></span> <span class="badge bg-danger rounded rounded-circle position-absolute" id="lblCount"></span></a></span>
+            <span class="me-2 position-relative"><a href="#cart" onclick="ShowCartClick()" data-bs-toggle="modal"><span class="bi bi-cart3"></span> <span class="badge bg-danger rounded rounded-circle position-absolute" id="lblCount"></span></a></span>
+            <div class="modal fade" id="cart">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
